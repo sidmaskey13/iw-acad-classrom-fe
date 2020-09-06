@@ -22,7 +22,7 @@ import Quizlist from "./components/quiz/quizlist";
 import AllSubmissions from './components/assignment/allSubmissions'
 import AllUsers from "./components/member/allusers";
 
-export const mainUrl="http://localhost:8000/"
+export const mainUrl="https://classromproject.herokuapp.com/"
 
 
 class App extends Component{
