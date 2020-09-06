@@ -10,7 +10,7 @@ const CommentReducer=(state = initialState, action)=>{
         case ADD_COMMENT:
             return{
                 ...state,
-                comments:[...state.comments,action.payload,]
+                comments:[...state.comments,action.payload]
             };
         case DELETE_COMMENT:
             return{

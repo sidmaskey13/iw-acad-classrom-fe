@@ -9,7 +9,7 @@ import {Link, Redirect} from "react-router-dom";
 class AssignmentList extends Component {
     state={
         modalOpen:false,
-        file:"",
+        file:null,
         link:"",
         assignmentId:""
     };
@@ -29,7 +29,7 @@ class AssignmentList extends Component {
         const formData = new FormData();
         formData.append('link', link);
         formData.append('assignment', this.actionInput.value);
-        if(file!==""){formData.append('file',file,file.name)};
+        if(file.name!==null){formData.append('file',file,file.name)};
         this.props.submitAssignment(formData)
         this.setState({
             modalOpen:false,
@@ -52,20 +52,28 @@ class AssignmentList extends Component {
     render(){
         const {user}=this.props.auth;
         const {link,modalOpen,assignmentId}=this.state;
-        if(this.props.isAuthenticated){
-            return <Redirect to="/"/>
-        }
+        // if(this.props.isAuthenticated){
+        //     return <Redirect to="/"/>
+        // }
         return (
             <Fragment>
-                <AddAssignementQuestion/>
+                {user?user.is_staff?<AddAssignementQuestion/>:"":""}
                 <div className="mt-2">
                     {
-                        this.props.assignment.map(assign=>(
+                        this.props.assignment?this.props.assignment.map(assign=>(
                             <Card key={assign.id}>
-                                <Card.Content image='/images/avatar/small/jenny.jpg' header={assign.id}/>
+                                <Card.Content image='/images/avatar/small/jenny.jpg' header={assign.title}/>
                                 <Card.Content extra>
                                     <strong>By: {assign.deadline_date}</strong><br/>
-                                    {user?user.is_staff?"":<Modal
+                                    {assign.file?<p><a href={assign.file} download>Download File</a></p>:""}
+                                    {user?user.is_staff?                                    <Link
+                                        className='btn btn-secondary'
+                                        to={{
+                                            pathname: "/assignment/submissions",
+                                            data:assign.id
+                                        }}>
+                                        Submissions (Count:{assign.submission_count})
+                                    </Link>:<Modal
                                         size="mini"
                                         centered={true}
                                         onClose={() => this.handleModalChange()}
@@ -96,18 +104,11 @@ class AssignmentList extends Component {
                                             </Modal.Description>
                                         </Modal.Content>
                                     </Modal>:""}
-                                    <Link
-                                        className='btn btn-secondary'
-                                        to={{
-                                            pathname: "/assignment/submissions",
-                                            data:assign.id
-                                        }}>
-                                        Edit (Count:{assign.submission_count})
-                                    </Link>
+
                                 </Card.Content>
                             </Card>
                         ))
-                    }
+                    :<h2>No data</h2>    }
                 </div>
             </Fragment>
         );

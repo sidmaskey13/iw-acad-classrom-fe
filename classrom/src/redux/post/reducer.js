@@ -14,7 +14,7 @@ const PostReducer=(state = initialState, action)=>{
         case ADD_POST:
             return{
                 ...state,
-                posts:[...state.posts,action.payload,]
+                posts:[action.payload,...state.posts]
             };
         case DELETE_POST:
             return{

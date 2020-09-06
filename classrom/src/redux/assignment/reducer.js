@@ -25,7 +25,7 @@ const AssignmentReducer=(state = initialState, action)=>{
         case ADD_ASSIGNMENT_QUESTION:
             return{
                 ...state,
-                question:[...state.question,action.payload,]
+                question:[action.payload,...state.question,action.payload]
             };
 
         default:return state

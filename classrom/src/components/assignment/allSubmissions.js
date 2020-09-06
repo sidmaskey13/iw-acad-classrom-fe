@@ -16,9 +16,9 @@ class AllSubmissions extends Component {
 
 
     render(){
-        if(this.props.isAuthenticated){
-            return <Redirect to="/"/>
-        }
+        // if(this.props.isAuthenticated){
+        //     return <Redirect to="/"/>
+        // }
         const {submission}=this.props;
         return (
             <Fragment>
@@ -26,7 +26,6 @@ class AllSubmissions extends Component {
                     {
                         submission?submission.map(assign=>(
                             <Card key={assign.id}>
-                                <Card.Content header={assign.id}/>
                                 <Card.Content>
                                     <strong>From: {assign.userName}</strong><br/>
                                     <i>Created at: {assign.created_at}</i><br/>
@@ -37,7 +36,6 @@ class AllSubmissions extends Component {
                         )):"No submissions"
                     }
                 </div>
-                <h1>hello</h1>
             </Fragment>
         );
     }

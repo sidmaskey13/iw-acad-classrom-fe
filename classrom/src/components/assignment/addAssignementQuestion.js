@@ -10,7 +10,7 @@ class AddAssignementQuestion extends Component {
         title:'',
         deadline:'',
         modalOpen:false,
-        file:"",
+        file:null,
 
     };
     handleChange=(e)=>{
@@ -30,7 +30,7 @@ class AddAssignementQuestion extends Component {
         const formData = new FormData();
         formData.append('title', title);
         formData.append('deadline_date', deadline);
-        formData.append('file',file,file.name);
+        if(file!==null){formData.append('file',file,file.name)};
         this.props.addAssignementQuestion(formData)
         this.setState({title:'',
             deadline:'',

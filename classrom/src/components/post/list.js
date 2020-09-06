@@ -123,7 +123,7 @@ class PostList extends Component {
                         ))
 
                     }
-                <Pagination defaultActivePage={1} totalPages={2} />
+                {/*<Pagination defaultActivePage={1} totalPages={2} />*/}
             </Fragment>
         );
     }

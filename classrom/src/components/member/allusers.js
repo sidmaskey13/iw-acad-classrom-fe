@@ -10,9 +10,9 @@ class AllUsers extends Component {
     }
     render() {
         const {all_user}=this.props;
-        if(this.props.isAuthenticated){
-            return <Redirect to="/"/>
-        }
+        // if(this.props.isAuthenticated){
+        //     return <Redirect to="/"/>
+        // }
         return (
             <div>
                 <h1>All Users</h1>

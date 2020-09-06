@@ -14,7 +14,7 @@ export const getPosts = () => (dispatch,getState) => {
             console.log(mainUrl)
                 dispatch({
                 type: GET_POSTS,
-                payload: res.data.results
+                payload: res.data
             })}
         ).catch(err=>{
         dispatch(alertActions.error(err.toString()));
