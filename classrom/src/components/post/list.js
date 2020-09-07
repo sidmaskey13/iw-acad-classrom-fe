@@ -91,7 +91,7 @@ class PostList extends Component {
                                             size="mini"
                                             centered={true}
                                             onClose={() => this.handleModalChange()}
-                                            onOpen={() => this.handleModalChange()}
+                                            onOpen={() => {this.handleModalChange();this.setState({postNumber:post.id})}}
                                             open={modalOpen}
                                             trigger={<Button>Add Comment</Button>}
                                         >
@@ -110,7 +110,7 @@ class PostList extends Component {
                                                                 type="submit"
                                                                 icon='angle right'
                                                                 size="mini"
-                                                                onClick={()=>this.setState({postNumber:post.id})} />:""}
+                                                                 />:""}
                                                         </FormGroup>
                                                     </Form>
                                                 </Modal.Description>

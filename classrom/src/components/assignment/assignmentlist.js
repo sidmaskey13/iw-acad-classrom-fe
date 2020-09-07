@@ -25,17 +25,18 @@ class AssignmentList extends Component {
     onSubmit=(e)=>{
         e.preventDefault();
         const {link,assignmentId,file}=this.state;
-
         const formData = new FormData();
         formData.append('link', link);
-        formData.append('assignment', this.actionInput.value);
-        if(file.name!==null){formData.append('file',file,file.name)};
+        formData.append('assignment', assignmentId);
+        if (typeof (file) == "object" && file != null) {
+            formData.append('file',file,file.name);
+        }
         this.props.submitAssignment(formData)
         this.setState({
             modalOpen:false,
             file:"",
             link:"",
-            assignment:""})
+            assignmentId:""})
 
     };
     fileSelectHandler = event =>{
@@ -62,7 +63,7 @@ class AssignmentList extends Component {
                     {
                         this.props.assignment?this.props.assignment.map(assign=>(
                             <Card key={assign.id}>
-                                <Card.Content image='/images/avatar/small/jenny.jpg' header={assign.title}/>
+                                <Card.Content header={assign.title}/>
                                 <Card.Content extra>
                                     <strong>By: {assign.deadline_date}</strong><br/>
                                     {assign.file?<p><a href={assign.file} download>Download File</a></p>:""}
@@ -77,7 +78,7 @@ class AssignmentList extends Component {
                                         size="mini"
                                         centered={true}
                                         onClose={() => this.handleModalChange()}
-                                        onOpen={() => this.handleModalChange()}
+                                        onOpen={() => {this.handleModalChange();this.setState({assignmentId:assign.id})}}
                                         open={modalOpen}
                                         trigger={<Button>Submit Assignment</Button>}
                                     >
@@ -91,8 +92,6 @@ class AssignmentList extends Component {
                                                                 placeholder="link"
                                                                 value={link}
                                                                 onChange={this.handleChange}/>
-
-                                                    <input type="hidden" name="assignmentId" value={assign.id}  ref={(input) => { this.actionInput = input }}/>
                                                     <Form.Field>
                                                         <label>File</label>
                                                         <input type="file" name="myfile" onChange={this.fileSelectHandler}/>
