@@ -67,14 +67,16 @@ class AssignmentList extends Component {
                                 <Card.Content extra>
                                     <strong>By: {assign.deadline_date}</strong><br/>
                                     {assign.file?<p><a href={assign.file} download>Download File</a></p>:""}
-                                    {user?user.is_staff?                                    <Link
-                                        className='btn btn-secondary'
-                                        to={{
-                                            pathname: "/assignment/submissions",
-                                            data:assign.id
-                                        }}>
-                                        Submissions (Count:{assign.submission_count})
-                                    </Link>:<Modal
+                                    {user?user.is_staff?
+                                        <Link
+                                            className='btn btn-secondary'
+                                            to={{
+                                                pathname: "/assignment/submissions",
+                                                data: assign.id
+                                            }}>
+                                            Submissions (Count:{assign.submission_count})
+                                        </Link> :
+                                        <Modal
                                         size="mini"
                                         centered={true}
                                         onClose={() => this.handleModalChange()}

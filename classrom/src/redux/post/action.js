@@ -32,9 +32,9 @@ export const deletePost = (id) => (dispatch,getState) => {
                 })}
         )
 };
-export const addPost = (lead) => (dispatch,getState) => {
+export const addPost = (data) => (dispatch,getState) => {
     dispatch(alertActions.loading_start());
-    axios.post(mainUrl+'api/post/',lead,tokenConfig(getState))
+    axios.post(mainUrl+'api/post/',data,tokenConfig(getState))
         .then(res =>
             {   dispatch(alertActions.success("Post added successfully"));
                 dispatch(alertActions.loading_end());
