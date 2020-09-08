@@ -23,8 +23,8 @@ import AllSubmissions from './components/assignment/allSubmissions'
 import AllUsers from "./components/member/allusers";
 import QuizQuestions from "./components/quiz/quizQuestions";
 
-// export const mainUrl="http://127.0.0.1:8000/"
-export const mainUrl="https://classromproject.herokuapp.com/"
+export const mainUrl="http://127.0.0.1:8000/"
+// export const mainUrl="https://classromproject.herokuapp.com/"
 
 
 class App extends Component{
@@ -49,7 +49,7 @@ class App extends Component{
                   <Route exact path="/assignment" component={Assignmentlist}/>
                   <Route exact path="/assignment/submissions" component={AllSubmissions}/>
                   <Route exact path="/quiz" component={Quizlist}/>
-                  <Route exact path="/quiz/questions" component={QuizQuestions}/>
+                  <Route exact path="/quiz/questions/:id" component={QuizQuestions}/>
                   <Route exact path="/all_user" component={AllUsers}/>
                 </Switch>
               </Container>

@@ -57,7 +57,7 @@ class Quizlist extends Component {
                             <Link
                                 className='btn btn-secondary'
                                 to={{
-                                    pathname: "/quiz/questions",
+                                    pathname: `/quiz/questions/${q.id}`,
                                     data: q.id
                                 }}>
                                 Take

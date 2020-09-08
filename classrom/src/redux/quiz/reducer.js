@@ -31,7 +31,7 @@ const QuizReducer=(state = initialState, action)=>{
         case ADD_QUESTION:
             return{
                 ...state,
-                question:[...state.question,action.payload]
+                question:[action.payload,...state.question]
             };
         case ADD_OPTION:
             return{

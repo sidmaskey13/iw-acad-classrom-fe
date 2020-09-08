@@ -2,7 +2,7 @@ import {alertActions} from "../notification/action";
 import axios from "axios";
 import {mainUrl} from "../../App";
 import {tokenConfig} from "../auth/action";
-import {GET_QUIZ,GET_QUESTION,ADD_QUIZ} from "../quiz/types";
+import {GET_QUIZ, GET_QUESTION, ADD_QUIZ, ADD_QUESTION} from "../quiz/types";
 
 export const getQuizList = () => (dispatch,getState) => {
     dispatch(alertActions.loading_start());
@@ -43,6 +43,21 @@ export const getQuestion = (id) => (dispatch,getState) => {
                 dispatch({
                     type: GET_QUESTION,
                     payload: res.data.result
+                })}
+        ).catch(err=>{
+        dispatch(alertActions.error(err.toString()));
+    })
+};
+
+export const addQuestionOption = (data) => (dispatch,getState) => {
+    dispatch(alertActions.loading_start());
+    axios.post(mainUrl+'api/quiz_question_add/',data,tokenConfig(getState))
+        .then(res =>
+            {   dispatch(alertActions.success("Quiz Question Created successfully"));
+                dispatch(alertActions.loading_end());
+                dispatch({
+                    type: ADD_QUESTION,
+                    payload: res.data
                 })}
         ).catch(err=>{
         dispatch(alertActions.error(err.toString()));

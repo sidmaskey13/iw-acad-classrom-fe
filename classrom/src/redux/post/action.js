@@ -2,7 +2,7 @@ import axios from 'axios'
 import {alertActions} from "../notification/action";
 import {tokenConfig} from "../auth/action";
 
-import {GET_POSTS,DELETE_POST,ADD_POST} from "./types";
+import {GET_POSTS,DELETE_POST,ADD_POST,CLEAR_POST} from "./types";
 
 import {mainUrl} from "../../App";
 
@@ -20,6 +20,13 @@ export const getPosts = () => (dispatch,getState) => {
         dispatch(alertActions.error(err.toString()));
     })
 };
+
+export const clearPost=()=>{
+    return{
+        type:CLEAR_POST,
+    }
+}
+
 export const deletePost = (id) => (dispatch,getState) => {
     dispatch(alertActions.loading_start());
     axios.delete(mainUrl+`api/post/${id}/`,tokenConfig(getState))

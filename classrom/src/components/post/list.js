@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {connect} from "react-redux";
 import {Card, Button, Dropdown, Form, FormGroup, Divider, Container, Modal, Pagination} from "semantic-ui-react";
 
-import {getPosts,deletePost} from "../../redux/post/action";
+import {getPosts,deletePost,clearPost} from "../../redux/post/action";
 import {addComment} from "../../redux/comment/action";
 import AddPostForm from './addForm'
 
@@ -50,6 +50,9 @@ class PostList extends Component {
             [e.target.name]:e.target.value
         })
     };
+    componentWillUnmount() {
+        this.props.clearPost()
+    }
 
 
     render(){
@@ -133,4 +136,4 @@ const mapStateToProps=state=>({
     posts:state.posts.posts,
     auth: state.auth
 });
-export default connect(mapStateToProps,{getPosts,deletePost,addComment})(PostList);
+export default connect(mapStateToProps,{getPosts,deletePost,addComment,clearPost})(PostList);

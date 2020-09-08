@@ -1,4 +1,4 @@
-import {GET_POSTS,DELETE_POST,ADD_POST} from "./types";
+import {GET_POSTS,DELETE_POST,ADD_POST,CLEAR_POST} from "./types";
 
 const initialState={
     posts:[]
@@ -21,8 +21,12 @@ const PostReducer=(state = initialState, action)=>{
                 ...state,
                 posts:state.posts.filter(i => i.id !== action.payload)
             };
+        case CLEAR_POST:
+            return{
+                ...state,
+                posts:[]
+            };
         default:return state
-
     }
 };
 export default PostReducer
