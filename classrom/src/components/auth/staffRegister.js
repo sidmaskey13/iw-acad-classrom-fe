@@ -43,10 +43,10 @@ class StaffRegister extends Component {
         })
     };
 
-    render() {
-        // if(this.props.isAuthenticated){
-        //     return <Redirect to="/"/>
-        // }
+    render(){
+        if(!this.props.isAuthenticated){
+            return <Redirect to="/"/>
+        }
         const {username,email,password,password2,first_name,last_name}=this.state
         return (
             <div>

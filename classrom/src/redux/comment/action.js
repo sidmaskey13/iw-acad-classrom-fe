@@ -17,9 +17,9 @@ export const deleteComment = (id) => (dispatch,getState) => {
         )
 };
 
-export const addComment = (lead) => (dispatch,getState) => {
+export const addComment = (id) => (dispatch,getState) => {
     dispatch(alertActions.loading_start());
-    axios.post(mainUrl+'api/comment/',lead,tokenConfig(getState))
+    axios.post(mainUrl+'api/comment/',id,tokenConfig(getState))
         .then(res =>
             {   dispatch(alertActions.success("Comment added successfully"));
                 dispatch(alertActions.loading_end());

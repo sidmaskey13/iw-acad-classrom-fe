@@ -5,7 +5,7 @@ import {Card, Button, Dropdown, Form, FormGroup, Divider, Container, Modal} from
 import {getAllSubmissionByQuestion} from "../../redux/assignment/action";
 import {Link, Redirect} from "react-router-dom";
 
-class AllSubmissions extends Component {
+class AllSubmissionsByQuestion extends Component {
     state={
         id:this.props.location.data
     };
@@ -16,9 +16,9 @@ class AllSubmissions extends Component {
 
 
     render(){
-        // if(this.props.isAuthenticated){
-        //     return <Redirect to="/"/>
-        // }
+        if(!this.props.isAuthenticated){
+            return <Redirect to="/"/>
+        }
         const {submission}=this.props;
         return (
             <Fragment>
@@ -45,6 +45,5 @@ const mapStateToProps=state=>({
     submission:state.assignment.submission,
     auth: state.auth,
     isAuthenticated: state.auth.isAuthenticated
-
 });
-export default connect(mapStateToProps,{getAllSubmissionByQuestion})(AllSubmissions);
+export default connect(mapStateToProps,{getAllSubmissionByQuestion})(AllSubmissionsByQuestion);

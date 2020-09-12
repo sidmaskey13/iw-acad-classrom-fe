@@ -21,6 +21,21 @@ export const getPosts = () => (dispatch,getState) => {
     })
 };
 
+export const getOwnPosts = () => (dispatch,getState) => {
+    dispatch(alertActions.loading_start());
+    axios.get(mainUrl+'api/own_post',tokenConfig(getState))
+        .then(res =>
+            {    dispatch(alertActions.loading_end());
+                console.log(mainUrl)
+                dispatch({
+                    type: GET_POSTS,
+                    payload: res.data.result
+                })}
+        ).catch(err=>{
+        dispatch(alertActions.error(err.toString()));
+    })
+};
+
 export const clearPost=()=>{
     return{
         type:CLEAR_POST,

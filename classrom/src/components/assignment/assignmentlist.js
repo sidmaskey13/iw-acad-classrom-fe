@@ -37,7 +37,6 @@ class AssignmentList extends Component {
             file:"",
             link:"",
             assignmentId:""})
-
     };
     fileSelectHandler = event =>{
         this.setState({
@@ -53,12 +52,19 @@ class AssignmentList extends Component {
     render(){
         const {user}=this.props.auth;
         const {link,modalOpen,assignmentId}=this.state;
-        // if(this.props.isAuthenticated){
-        //     return <Redirect to="/"/>
-        // }
+        if(!this.props.isAuthenticated){
+            return <Redirect to="/"/>
+        }
         return (
             <Fragment>
                 {user?user.is_staff?<AddAssignementQuestion/>:"":""}
+                <Link
+                    className='btn btn-primary'
+                    to={{
+                        pathname: `/assignment/own_submissions`,
+                    }}>
+                    My Assignment Submissions
+                </Link>
                 <div className="mt-2">
                     {
                         this.props.assignment?this.props.assignment.map(assign=>(
@@ -120,6 +126,5 @@ const mapStateToProps=state=>({
     assignment:state.assignment.question,
     auth: state.auth,
     isAuthenticated: state.auth.isAuthenticated
-
 });
 export default connect(mapStateToProps,{getAllAssignmentQuestion,submitAssignment})(AssignmentList);

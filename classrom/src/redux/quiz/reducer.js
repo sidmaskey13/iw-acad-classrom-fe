@@ -1,10 +1,22 @@
-import {GET_QUIZ,GET_OPTION,GET_QUESTION,ADD_OPTION,ADD_QUESTION,ADD_QUIZ,DELETE_OPTION,DELETE_QUESTION,DELETE_QUIZ} from "./types";
+import {
+    GET_QUIZ,
+    GET_OPTION,
+    GET_QUESTION,
+    ADD_OPTION,
+    ADD_QUESTION,
+    ADD_QUIZ,
+    DELETE_OPTION,
+    DELETE_QUESTION,
+    DELETE_QUIZ,
+    CLEAR_QUESTION, GET_SCORE,ADD_SCORE
+} from "./types";
 
 const initialState={
     quiz:[],
     question:[],
     option:[],
-}
+    score:[]
+};
 
 const QuizReducer=(state = initialState, action)=>{
     switch(action.type) {
@@ -38,6 +50,11 @@ const QuizReducer=(state = initialState, action)=>{
                 ...state,
                 option:[...state.option,action.payload,]
             };
+        case CLEAR_QUESTION:
+            return{
+                ...state,
+                question:[]
+            };
         case DELETE_QUIZ:
             return{
                 ...state,
@@ -52,6 +69,16 @@ const QuizReducer=(state = initialState, action)=>{
             return{
                 ...state,
                 option:state.option.filter(i => i.id !== action.payload)
+            };
+        case GET_SCORE:
+            return{
+                ...state,
+                score:action.payload
+            };
+        case ADD_SCORE:
+            return{
+                ...state,
+                score:action.payload
             };
         default:return state
 

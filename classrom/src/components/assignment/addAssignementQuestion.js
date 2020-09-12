@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {addAssignementQuestion} from "../../redux/assignment/action";
 import {Button, Container, Form, Header, Modal} from "semantic-ui-react";
-import {toast} from "react-toastify";
-import DateTimePicker from 'react-datetime-picker';
+import {Redirect} from "react-router-dom";
 
 class AddAssignementQuestion extends Component {
     state={
@@ -46,7 +45,10 @@ class AddAssignementQuestion extends Component {
         })
     };
     render() {
-        const {title,deadline,modalOpen}=this.state
+        const {title,deadline,modalOpen}=this.state;
+        if(!this.props.isAuthenticated){
+            return <Redirect to="/"/>
+        }
         return (
             <Container className="mt-1">
                 <Modal
@@ -88,5 +90,7 @@ class AddAssignementQuestion extends Component {
         );
     }
 }
-
-export default connect(null,{addAssignementQuestion})(AddAssignementQuestion);
+const mapStateToProps=state=>({
+    isAuthenticated: state.auth.isAuthenticated
+});
+export default connect(mapStateToProps,{addAssignementQuestion})(AddAssignementQuestion);

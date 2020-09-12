@@ -5,6 +5,7 @@ import {Card, Button, Dropdown, Form, FormGroup, Divider, Container, Modal, Pagi
 import {getPosts,deletePost,clearPost} from "../../redux/post/action";
 import {addComment} from "../../redux/comment/action";
 import AddPostForm from './addForm'
+import {Link, Redirect} from "react-router-dom";
 
 class PostList extends Component {
     state={
@@ -58,15 +59,24 @@ class PostList extends Component {
     render(){
         const {user}=this.props.auth;
         const {comment,deleteBtn,postNumber,commentBtn,modalOpen}=this.state;
-
+        // if(this.props.isAuthenticated){
+        //     return <Redirect to="/"/>
+        // }
         return (
             <Fragment>
 
                 <AddPostForm/>
+                <Link
+                    className='btn btn-primary'
+                    to={{
+                        pathname: `/post/own_post`,
+                    }}>
+                    My Posts
+                </Link>
                     {
                         this.props.posts.map(post=>(
                             <Card key={post.id} fluid>
-                                <Card.Content image='/images/avatar/small/jenny.jpg' header={post.title}/>
+                                <Card.Content header={post.title}/>
                                 <Card.Content description={post.body}/>
                                 <Card.Content extra>
                                     <strong>By: {post.userName}</strong><br/>
@@ -134,6 +144,8 @@ class PostList extends Component {
 
 const mapStateToProps=state=>({
     posts:state.posts.posts,
-    auth: state.auth
+    auth: state.auth,
+    isAuthenticated: state.auth.isAuthenticated
+
 });
 export default connect(mapStateToProps,{getPosts,deletePost,addComment,clearPost})(PostList);
