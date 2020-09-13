@@ -77,7 +77,7 @@ class AddAssignementQuestion extends Component {
                                 <Form.Input fluid
                                             label='Deadline'
                                             name="deadline"
-                                            placeholder="deadline"
+                                            placeholder="Date Format: yyyy-mm-dd hh:mm"
                                             value={deadline}
                                             onChange={this.handleChange}/>
 

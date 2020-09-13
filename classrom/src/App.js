@@ -28,8 +28,8 @@ import ScoreDataSingleStudent from "./components/quiz/scoreDataSingleStudent";
 import ScoreDataAllQuiz from "./components/quiz/scoreDataAllQuiz";
 import AddQuestionOptionDynamic from "./components/quiz/addQuestionOptionDynamic";
 
-export const mainUrl="http://127.0.0.1:8000/"
-// export const mainUrl="https://classromproject.herokuapp.com/"
+// export const mainUrl="http://127.0.0.1:8000/"
+export const mainUrl="https://classromproject.herokuapp.com/"
 
 
 class App extends Component{

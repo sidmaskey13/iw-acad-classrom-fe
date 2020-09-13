@@ -65,7 +65,7 @@ class QuizList extends Component {
                                 <Form.Input fluid
                                             label='DeadLine Date'
                                             name="deadline_date"
-                                            placeholder="deadline_date"
+                                            placeholder="Date Format: yyyy-mm-dd hh:mm"
                                             value={deadline_date}
                                             onChange={this.handleChange}/>
                                 <button type="submit" className="btn btn-primary">Save</button>
