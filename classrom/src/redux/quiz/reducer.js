@@ -8,7 +8,7 @@ import {
     DELETE_OPTION,
     DELETE_QUESTION,
     DELETE_QUIZ,
-    CLEAR_QUESTION, GET_SCORE,ADD_SCORE
+    CLEAR_QUESTION, GET_SCORE, ADD_SCORE, CLEAR_SCORE
 } from "./types";
 
 const initialState={
@@ -79,6 +79,11 @@ const QuizReducer=(state = initialState, action)=>{
             return{
                 ...state,
                 score:action.payload
+            };
+        case CLEAR_SCORE:
+            return{
+                ...state,
+                score:[]
             };
         default:return state
 

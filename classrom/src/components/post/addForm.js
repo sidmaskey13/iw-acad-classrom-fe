@@ -29,7 +29,6 @@ class AddPostForm extends Component {
     render() {
         const {title,body,modalOpen}=this.state
         return (
-            <Container className="mt-1">
                 <Modal
                     size="mini"
                     centered={true}
@@ -58,7 +57,6 @@ class AddPostForm extends Component {
                         </Modal.Description>
                     </Modal.Content>
                 </Modal>
-            </Container>
         );
     }
 }

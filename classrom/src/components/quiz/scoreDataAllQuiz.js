@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getScoreQuizAllStudent} from "../../redux/quiz/action";
+import {getScoreQuizAllStudent,clearScore} from "../../redux/quiz/action";
 import {connect} from "react-redux";
 import {Button, Card, Checkbox, Form, Table} from "semantic-ui-react";
 import {Link, Redirect} from "react-router-dom";
@@ -12,6 +12,9 @@ class ScoreDataAllQuiz extends Component {
 
     componentDidMount() {
         this.props.getScoreQuizAllStudent(this.state.quiz_id)
+    }
+    componentWillUnmount() {
+        this.props.clearScore()
     }
 
     render() {
@@ -51,4 +54,4 @@ const mapStateToProps=state=>({
     auth: state.auth,
     isAuthenticated: state.auth.isAuthenticated
 });
-export default connect(mapStateToProps,{getScoreQuizAllStudent})(ScoreDataAllQuiz);
+export default connect(mapStateToProps,{getScoreQuizAllStudent,clearScore})(ScoreDataAllQuiz);

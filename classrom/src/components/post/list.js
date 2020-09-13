@@ -13,11 +13,11 @@ class PostList extends Component {
         comment:"",
         commentBtn:true,
         postNumber:"",
-        modalOpen:false
-
+        modalOpen:false,
+        page:1
     };
     componentDidMount() {
-        this.props.getPosts()
+        this.props.getPosts(this.state.page)
     }
     handleModalChange=()=>{
         this.setState({
@@ -51,36 +51,65 @@ class PostList extends Component {
             [e.target.name]:e.target.value
         })
     };
+    increaseLike=()=>{
+        this.setState({
+            like:this.state.like+1
+        })
+    };
     componentWillUnmount() {
         this.props.clearPost()
     }
-
+    nextPage=()=>{
+        this.props.getPosts(this.state.page+1)
+        this.setState({
+            page:this.state.page+1
+        })
+    };
+    prevPage=()=>{
+        if(this.state.page>1){
+            this.props.getPosts(this.state.page-1)
+            this.setState({
+                page:this.state.page-1
+            })
+        }
+    };
 
     render(){
         const {user}=this.props.auth;
-        const {comment,deleteBtn,postNumber,commentBtn,modalOpen}=this.state;
+        const {comment,deleteBtn,postNumber,commentBtn,modalOpen,like}=this.state;
+        const inline = {'display': 'inline'}
         // if(this.props.isAuthenticated){
         //     return <Redirect to="/"/>
         // }
         return (
             <Fragment>
-
-                <AddPostForm/>
-                <Link
-                    className='btn btn-primary'
-                    to={{
-                        pathname: `/post/own_post`,
-                    }}>
-                    My Posts
-                </Link>
+                <div className="row mt-1" >
+                    <div className="col-md-2"><AddPostForm/></div>
+                    <div className="col-md-2">
+                        <Link
+                            className='btn btn-primary'
+                            to={{
+                                pathname: `/post/own_post`,
+                            }}>
+                            My Posts
+                        </Link>
+                    </div>
+                </div>
+                <nav aria-label="Page navigation example" className="mt-1 mb-1">
+                    <ul className="pagination">
+                        <li className="page-item"><a className="page-link" onClick={this.prevPage}>Previous</a></li>
+                        <li className="page-item"><a className="page-link" onClick={this.nextPage}>Next</a></li>
+                    </ul>
+                </nav>
                     {
-                        this.props.posts.map(post=>(
+                        this.props.posts.map((post,i)=>(
                             <Card key={post.id} fluid>
                                 <Card.Content header={post.title}/>
                                 <Card.Content description={post.body}/>
                                 <Card.Content extra>
                                     <strong>By: {post.userName}</strong><br/>
-                                    <Button  color='red' circular icon='heart' size="mini"/>
+                                    {/*<Button  color='red' circular icon='heart' size="mini" onClick={()=>this.increaseLike(i)}/>*/}
+                                    {/*{`${like}`}*/}
                                     <Dropdown>
                                         <Dropdown.Menu>
                                             {(post.user==user.id && deleteBtn)?<Dropdown.Item text='Delete' onClick={()=>this.onHandleDelete(post.id)} />:""}

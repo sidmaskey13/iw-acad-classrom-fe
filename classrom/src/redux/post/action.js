@@ -6,18 +6,19 @@ import {GET_POSTS,DELETE_POST,ADD_POST,CLEAR_POST} from "./types";
 
 import {mainUrl} from "../../App";
 
-export const getPosts = () => (dispatch,getState) => {
+export const getPosts = (page) => (dispatch,getState) => {
     dispatch(alertActions.loading_start());
-    axios.get(mainUrl+'api/post/',tokenConfig(getState))
+    axios.get(mainUrl+'api/post/?page='+page,tokenConfig(getState))
         .then(res =>
             {    dispatch(alertActions.loading_end());
             console.log(mainUrl)
                 dispatch({
                 type: GET_POSTS,
-                payload: res.data
+                payload: res.data.results
             })}
         ).catch(err=>{
         dispatch(alertActions.error(err.toString()));
+        if(err.response.data.detail){dispatch(alertActions.error("No page available"))};
     })
 };
 

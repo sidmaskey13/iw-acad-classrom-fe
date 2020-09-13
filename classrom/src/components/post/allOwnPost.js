@@ -6,7 +6,7 @@ import {
     Divider,
 } from "semantic-ui-react";
 
-import {getOwnPosts,deletePost} from "../../redux/post/action";
+import {getOwnPosts,deletePost,clearPost} from "../../redux/post/action";
 import {Redirect} from "react-router-dom";
 
 class OwnPostList extends Component {
@@ -20,6 +20,9 @@ class OwnPostList extends Component {
         this.setState({deleteBtn:false})
         this.props.deletePost(id)
     };
+    componentWillUnmount() {
+        this.props.clearPost()
+    }
 
     render(){
         const {user}=this.props.auth;
@@ -27,11 +30,6 @@ class OwnPostList extends Component {
         if(!this.props.isAuthenticated){
             return <Redirect to="/"/>
         }
-        const sections = [
-            { key: 'Post', content: 'Post', link: '/' },
-            { key: 'Own Post', content: 'Own Post', active: true },
-        ]
-
         return (
             <Fragment>
                 <div className="mt-1"></div>
@@ -59,6 +57,5 @@ const mapStateToProps=state=>({
     posts:state.posts.posts,
     auth: state.auth,
     isAuthenticated: state.auth.isAuthenticated
-
 });
-export default connect(mapStateToProps,{getOwnPosts,deletePost})(OwnPostList);
+export default connect(mapStateToProps,{getOwnPosts,deletePost,clearPost})(OwnPostList);

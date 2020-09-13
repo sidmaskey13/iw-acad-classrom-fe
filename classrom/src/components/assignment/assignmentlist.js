@@ -5,6 +5,7 @@ import {Card, Button, Dropdown, Form, FormGroup, Divider, Container, Modal} from
 import {getAllAssignmentQuestion,submitAssignment} from "../../redux/assignment/action";
 import AddAssignementQuestion from "./addAssignementQuestion";
 import {Link, Redirect} from "react-router-dom";
+import AddPostForm from "../post/addForm";
 
 class AssignmentList extends Component {
     state={
@@ -57,18 +58,24 @@ class AssignmentList extends Component {
         }
         return (
             <Fragment>
-                {user?user.is_staff?<AddAssignementQuestion/>:"":""}
-                <Link
-                    className='btn btn-primary'
-                    to={{
-                        pathname: `/assignment/own_submissions`,
-                    }}>
-                    My Assignment Submissions
-                </Link>
+                <div className="row mt-1" >
+                    <div className="col-md-2">{user?user.is_staff?<AddAssignementQuestion/>:"":""}</div>
+                    <div className="col-md-2">
+                        <Link
+                            className='btn btn-primary'
+                            to={{
+                                pathname: `/assignment/own_submissions`,
+                            }}>
+                            My Assignment Submissions
+                        </Link>
+                    </div>
+                </div>
+
+
                 <div className="mt-2">
                     {
                         this.props.assignment?this.props.assignment.map(assign=>(
-                            <Card key={assign.id}>
+                            <Card key={assign.id} fluid>
                                 <Card.Content header={assign.title}/>
                                 <Card.Content extra>
                                     <strong>By: {assign.deadline_date}</strong><br/>

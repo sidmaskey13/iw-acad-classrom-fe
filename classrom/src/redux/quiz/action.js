@@ -9,7 +9,7 @@ import {
     ADD_QUESTION,
     CLEAR_QUESTION,
     DELETE_QUESTION,
-    DELETE_QUIZ, ADD_SCORE, GET_SCORE
+    DELETE_QUIZ, ADD_SCORE, GET_SCORE, CLEAR_SCORE
 } from "../quiz/types";
 import {DELETE_POST} from "../post/types";
 
@@ -156,3 +156,9 @@ export const getScoreQuizAllStudent = (id) => (dispatch,getState) => {
         dispatch(alertActions.error(err.toString()));
     })
 };
+
+export const clearScore=()=>{
+    return{
+        type:CLEAR_SCORE,
+    }
+}

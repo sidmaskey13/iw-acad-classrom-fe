@@ -77,35 +77,47 @@ class QuizList extends Component {
                 <h1>Quiz</h1>
                 {
                     this.props.quiz.map(q=>(
-                        <Card key={q.id} fluid>
+                        <Card key={q.id} className="pb-1" fluid>
                             <Card.Content header={q.title}/>
                             <Card.Content description={q.deadline_date}/>
-                            {user?user.is_staff?<Button onClick={id=>this.deleteQuizHandle(q.id)} size="tiny"  color='red'>Delete</Button>:"":""}
-                            <Link
-                                className='btn btn-secondary'
-                                to={{
-                                    pathname: `/quiz/questions/${q.id}`,
-                                    data: q.id
-                                }}>
-                                Take
-                            </Link>
-                            <Link
-                                className='btn btn-primary'
-                                to={{
-                                    pathname: `/quiz/score_student/${q.id}`,
-                                    data: q.id
-                                }}>
-                                My Quiz Score
-                            </Link>
-                            <Link
-                                className='btn btn-primary'
-                                to={{
-                                    pathname: `/quiz/score_all_student/${q.id}`,
-                                    data: q.id
-                                }}>
-                                All Quiz Score
-                            </Link>
-
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-md-1"><Link
+                                        className='btn btn-secondary'
+                                        to={{
+                                            pathname: `/quiz/questions/${q.id}`,
+                                            data: q.id
+                                        }}>
+                                        Take
+                                    </Link></div>
+                                    <div className="col-md-6"><Link
+                                        className='btn btn-primary'
+                                        to={{
+                                            pathname: `/quiz/score_student/${q.id}`,
+                                            data: q.id
+                                        }}>
+                                        My Quiz Score
+                                    </Link>
+                                    </div>
+                                    {user ? user.is_staff ?
+                                        <div className="row">
+                                            <div className="col-md-6">
+                                                <Link
+                                                    className='btn btn-primary'
+                                                    to={{
+                                                        pathname: `/quiz/score_all_student/${q.id}`,
+                                                        data: q.id
+                                                    }}>
+                                                    All Quiz Score
+                                                </Link>
+                                            </div>
+                                            <div className="col-md-4">
+                                                <Button onClick={id => this.deleteQuizHandle(q.id)} size="tiny"
+                                                        color='red'>Delete</Button>
+                                            </div>
+                                        </div> : "" : ""}
+                                </div>
+                            </div>
                         </Card>
                     ))
 
