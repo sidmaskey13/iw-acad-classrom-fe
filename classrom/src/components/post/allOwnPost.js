@@ -7,7 +7,7 @@ import {
 } from "semantic-ui-react";
 
 import {getOwnPosts,deletePost,clearPost} from "../../redux/post/action";
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 class OwnPostList extends Component {
     state={
@@ -26,24 +26,36 @@ class OwnPostList extends Component {
 
     render(){
         const {user}=this.props.auth;
-        const {posts}=this.props.posts;
         if(!this.props.isAuthenticated){
             return <Redirect to="/"/>
         }
         return (
             <Fragment>
                 <div className="mt-1"></div>
-              {this.props.posts?this.props.posts.map(post=>(
+              {this.props.posts.length!==0?this.props.posts.map(post=>(
                         <Card key={post.id} fluid>
                             <Card.Content header={post.title}/>
                             <Card.Content description={post.body}/>
                             <Card.Content extra>
                                 <strong>By: {post.userName}</strong><br/>
+                                {(post.user==user.id && this.state.deleteBtn)?
                                 <Dropdown>
                                     <Dropdown.Menu>
-                                        {(post.user==user.id && this.state.deleteBtn)?<Dropdown.Item text='Delete' onClick={()=>this.onHandleDelete(post.id)} />:""}
+                                        <Dropdown.Item text='Delete' onClick={()=>this.onHandleDelete(post.id)} />
+                                        <Dropdown.Item>
+                                            <Link
+                                                to={{
+                                                    className:"btn",
+                                                    pathname: `/post/edit/${post.id}`,
+                                                    title: post.title,
+                                                    body: post.body,
+                                                }}>
+                                                Edit
+                                            </Link>
+                                        </Dropdown.Item>
+
                                     </Dropdown.Menu>
-                                </Dropdown><Divider/>
+                                </Dropdown>:""}
                             </Card.Content>
                         </Card>
                     )):""

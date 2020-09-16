@@ -19,6 +19,7 @@ import {loadUser} from "./redux/auth/action";
 import {Container} from "semantic-ui-react";
 import Assignmentlist from "./components/assignment/assignmentList";
 import OwnPostList from "./components/post/allOwnPost";
+import EditPostForm from "./components/post/edit";
 import Quizlist from "./components/quiz/quizList";
 import AllSubmissions from './components/assignment/allSubmissionsByQuestion'
 import StudentSubmissions from './components/assignment/studentOwnSubmissons'
@@ -52,6 +53,7 @@ class App extends Component{
                   <PrivateRoute exact path="/staff_register" component={StaffRegister}/>
                   <PrivateRoute exact path="/" component={Main}/>
                   <PrivateRoute exact path="/post/own_post" component={OwnPostList}/>
+                  <PrivateRoute exact path="/post/edit/:id" component={EditPostForm}/>
                   <PrivateRoute exact path="/assignment" component={Assignmentlist}/>
                   <PrivateRoute exact path="/assignment/submissions" component={AllSubmissions}/>
                   <PrivateRoute exact path="/assignment/own_submissions" component={StudentSubmissions}/>

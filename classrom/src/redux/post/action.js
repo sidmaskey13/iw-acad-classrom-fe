@@ -2,7 +2,7 @@ import axios from 'axios'
 import {alertActions} from "../notification/action";
 import {tokenConfig} from "../auth/action";
 
-import {GET_POSTS,DELETE_POST,ADD_POST,CLEAR_POST} from "./types";
+import {GET_POSTS, DELETE_POST, ADD_POST, CLEAR_POST, EDIT_POST} from "./types";
 
 import {mainUrl} from "../../App";
 
@@ -63,6 +63,21 @@ export const addPost = (data) => (dispatch,getState) => {
                 dispatch(alertActions.loading_end());
                 dispatch({
                     type: ADD_POST,
+                    payload: res.data
+                })}
+        ).catch(err=>{
+        dispatch(alertActions.error(err.toString()));
+    })
+};
+
+export const editPost = (id,data) => (dispatch,getState) => {
+    dispatch(alertActions.loading_start());
+    axios.patch(mainUrl+`api/post/${id}/`,data,tokenConfig(getState))
+        .then(res =>
+            {   dispatch(alertActions.success("Post edited successfully"));
+                dispatch(alertActions.loading_end());
+                dispatch({
+                    type: EDIT_POST,
                     payload: res.data
                 })}
         ).catch(err=>{
