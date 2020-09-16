@@ -1,4 +1,4 @@
-import {GET_ALL_SUBMISSION,GET_ASSIGNMENT_QUESTION,ADD_ASSIGNMENT_QUESTION,SUBMIT_ASSIGNMENT} from "./types";
+import {GET_ALL_SUBMISSION,GET_ASSIGNMENT_QUESTION,ADD_ASSIGNMENT_QUESTION,SUBMIT_ASSIGNMENT,CLEAR_ASSIGNMENT_QUESTION} from "./types";
 
 const initialState={
     question:[],
@@ -16,6 +16,11 @@ const AssignmentReducer=(state = initialState, action)=>{
             return{
                 ...state,
                 submission:action.payload
+            };
+        case CLEAR_ASSIGNMENT_QUESTION:
+            return{
+                ...state,
+                question:[]
             };
         case SUBMIT_ASSIGNMENT:
             return{

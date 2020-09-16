@@ -2,10 +2,17 @@ import axios from 'axios'
 import {alertActions} from "../notification/action";
 import {tokenConfig} from "../auth/action";
 
-import {GET_ASSIGNMENT_QUESTION,GET_ALL_SUBMISSION,ADD_ASSIGNMENT_QUESTION, SUBMIT_ASSIGNMENT} from "./types";
+import {
+    GET_ASSIGNMENT_QUESTION,
+    GET_ALL_SUBMISSION,
+    ADD_ASSIGNMENT_QUESTION,
+    SUBMIT_ASSIGNMENT,
+    CLEAR_ASSIGNMENT_QUESTION
+} from "./types";
 
 import {mainUrl} from "../../App";
 import {REGISTER_FAIL, REGISTER_SUCCESS} from "../auth/types";
+import {CLEAR_POST} from "../post/types";
 
 export const getAllAssignmentQuestion = () => (dispatch,getState) => {
     dispatch(alertActions.loading_start());
@@ -96,3 +103,9 @@ export const submitAssignment = (formdata) => (dispatch,getState) => {
         ).catch(err=>{
         dispatch(alertActions.error(err.toString()));
     })};
+
+export const clearAssignmentQuestion=()=>{
+    return{
+        type:CLEAR_ASSIGNMENT_QUESTION,
+    }
+}

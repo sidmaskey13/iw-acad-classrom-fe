@@ -78,12 +78,10 @@ class PostList extends Component {
         const {user}=this.props.auth;
         const {comment,deleteBtn,postNumber,commentBtn,modalOpen,like}=this.state;
         const inline = {'display': 'inline'}
-        // if(this.props.isAuthenticated){
-        //     return <Redirect to="/"/>
-        // }
+
         return (
             <Fragment>
-                <div className="row mt-1" >
+                {this.props.notification.isLoading?"":<div><div className="row mt-1" >
                     <div className="col-md-2"><AddPostForm/></div>
                     <div className="col-md-2">
                         <Link
@@ -95,12 +93,12 @@ class PostList extends Component {
                         </Link>
                     </div>
                 </div>
-                <nav aria-label="Page navigation example" className="mt-1 mb-1">
-                    <ul className="pagination">
-                        <li className="page-item"><a className="page-link" onClick={this.prevPage}>Previous</a></li>
-                        <li className="page-item"><a className="page-link" onClick={this.nextPage}>Next</a></li>
-                    </ul>
-                </nav>
+                    <nav aria-label="Page navigation example" className="mt-1 mb-1">
+                        <ul className="pagination">
+                            <li className="page-item"><a className="page-link" onClick={this.prevPage}>Previous</a></li>
+                            <li className="page-item"><a className="page-link" onClick={this.nextPage}>Next</a></li>
+                        </ul>
+                    </nav>
                     {
                         this.props.posts.map((post,i)=>(
                             <Card key={post.id} fluid>
@@ -149,10 +147,10 @@ class PostList extends Component {
                                                                         onChange={this.handleChange}/>
                                                             {commentBtn?
                                                                 <Button
-                                                                type="submit"
-                                                                icon='angle right'
-                                                                size="mini"
-                                                                 />:""}
+                                                                    type="submit"
+                                                                    icon='angle right'
+                                                                    size="mini"
+                                                                />:""}
                                                         </FormGroup>
                                                     </Form>
                                                 </Modal.Description>
@@ -163,8 +161,7 @@ class PostList extends Component {
                                 </Card.Content>
                             </Card>
                         ))
-
-                    }
+                    }</div>}
                 {/*<Pagination defaultActivePage={1} totalPages={2} />*/}
             </Fragment>
         );
@@ -174,7 +171,7 @@ class PostList extends Component {
 const mapStateToProps=state=>({
     posts:state.posts.posts,
     auth: state.auth,
-    isAuthenticated: state.auth.isAuthenticated
-
+    isAuthenticated: state.auth.isAuthenticated,
+    notification:state.notification
 });
 export default connect(mapStateToProps,{getPosts,deletePost,addComment,clearPost})(PostList);

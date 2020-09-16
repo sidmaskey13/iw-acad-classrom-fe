@@ -37,6 +37,7 @@ class App extends Component{
 
   componentDidMount() {
     store.dispatch(loadUser())
+    document.title = "Classrom"
   }
 
   render() {
