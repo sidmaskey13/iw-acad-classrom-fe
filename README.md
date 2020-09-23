@@ -1,17 +1,15 @@
+This is frontend repo
 # iw-acad-classrom-be 
 
 Classrom is a simple website that aims to simplify the activities that takes place in a classroom. It has features to create posts, submit assignements, online quizes and authentication.
+It uses Django as backend, React with Redux as frontend and PostgreSQL as DB.
 
-## Installation
+#Site
+https://classromapp.herokuapp.com
 
-### Clone
-
-- Clone this repo to your local machine using `https://github.com/sidmaskey13/iw-acad-classrom-be.git
-
-### Setup
-
-## Features
+## Bugs
+Likes doesnt work
+Profile pic gets stored but doesnt show
 
 ## Team
 -Siddhartha Maskey
-
