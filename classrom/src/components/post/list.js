@@ -4,6 +4,7 @@ import {Card, Button, Dropdown, Form, FormGroup, Divider, Container, Modal, Pagi
 
 import {getPosts,deletePost,clearPost} from "../../redux/post/action";
 import {addComment} from "../../redux/comment/action";
+import {addLike} from "../../redux/like/action";
 import AddPostForm from './addForm'
 import {Link, Redirect} from "react-router-dom";
 
@@ -51,10 +52,10 @@ class PostList extends Component {
             [e.target.name]:e.target.value
         })
     };
-    increaseLike=()=>{
-        this.setState({
-            like:this.state.like+1
-        })
+    handleIncreaseLike=(id)=>{
+        const likeId = {post:id}
+        this.props.addLike(likeId)
+        this.props.getPosts(this.state.page)
     };
     componentWillUnmount() {
         this.props.clearPost()
@@ -106,8 +107,8 @@ class PostList extends Component {
                                 <Card.Content description={post.body}/>
                                 <Card.Content extra>
                                     <strong>By: {post.userName}</strong><br/>
-                                    {/*<Button  color='red' circular icon='heart' size="mini" onClick={()=>this.increaseLike(i)}/>*/}
-                                    {/*{`${like}`}*/}
+                                    <Button  color='red' circular icon='heart' size="mini" onClick={()=>this.handleIncreaseLike(post.id)}/>
+                                    {post.likes_count}
                                     <Dropdown>
                                         <Dropdown.Menu>
                                             {(post.user==user.id && deleteBtn)?<Dropdown.Item text='Delete' onClick={()=>this.onHandleDelete(post.id)} />:""}
@@ -174,4 +175,4 @@ const mapStateToProps=state=>({
     isAuthenticated: state.auth.isAuthenticated,
     notification:state.notification
 });
-export default connect(mapStateToProps,{getPosts,deletePost,addComment,clearPost})(PostList);
+export default connect(mapStateToProps,{getPosts,deletePost,addComment,clearPost,addLike})(PostList);

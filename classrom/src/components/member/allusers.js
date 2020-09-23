@@ -45,7 +45,7 @@ class AllUsers extends Component {
                         {all_user?all_user.allUser?all_user.allUser.map(i=>(<Table.Row>
                             <Table.Cell>{i.username}</Table.Cell>
                             <Table.Cell>{i.is_superuser?"Superuser|":"Student"}{i.is_staff?"Staff":""}</Table.Cell>
-                            <Table.Cell>{user?user.is_superuser?<Modal
+                            <Table.Cell>{user?user.is_superuser?user.id!==i.id?<Modal
                                 size="mini"
                                 centered={true}
                                 onClose={() => this.handleModalChange()}
@@ -66,7 +66,7 @@ class AllUsers extends Component {
                                         positive
                                     />
                                 </Modal.Actions>
-                            </Modal>:"":""}</Table.Cell>
+                            </Modal>:"":"":""}</Table.Cell>
                         </Table.Row>)):"":""}
 
                     </Table.Body>

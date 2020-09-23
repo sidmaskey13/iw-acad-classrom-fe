@@ -1,7 +1,7 @@
 import {ADD_LIKE} from "./types";
 
 const initialState={
-    likes:[]
+    likes:null
 }
 
 const LikeReducer=(state = initialState, action)=>{
@@ -9,7 +9,7 @@ const LikeReducer=(state = initialState, action)=>{
         case ADD_LIKE:
             return{
                 ...state,
-                likes:[...state.likes,action.payload]
+                likes:action.payload
             };
         default:return state
     }
